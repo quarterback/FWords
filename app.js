@@ -24,8 +24,8 @@ const PRETTY_KEYS = {
   "-": "Del",
 };
 
-const ROUNDS = 6;
-const LENGTH = 6;
+const ROUNDS = 5;
+const LENGTH = 5;
 
 const dictionaryRequest = fetch("/dictionary.txt").then((r) => r.text());
 const board = $(".board");
