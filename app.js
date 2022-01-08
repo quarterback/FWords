@@ -18,14 +18,14 @@ const dom = (tag, attrs, ...children) => {
   return el;
 };
 
-const KEYS = ["QWERTYUIOPÅ", "ASDFGHJKLÖÄ", "+ZXCVBNM-"];
+const KEYS = ["qwertyuiopå", "asdfghjklöä", "+zxcvbnm-"];
 const PRETTY_KEYS = {
-  "+": "⏎",
-  "-": "⌫",
+  "+": "Enter",
+  "-": "Del",
 };
 
 const ROUNDS = 6;
-const LENGTH = 5;
+const LENGTH = 6;
 
 const dictionaryRequest = fetch("/dictionary.txt").then((r) => r.text());
 const board = $(".board");
@@ -67,11 +67,11 @@ async function startGame({ word, kb, board, words }) {
     board.revealHint(round, hints);
     kb.revealHint(guess, hints);
     if (guess.join('') === word) {
-      $(".feedback").innerText = `Bra jobbat!`;  
+      $(".feedback").innerText = `Hyvää työtä!`;  
       return;
     }
   }
-  $(".feedback").innerText = `GAME OVER\nRätt svar var: ${word}`;
+  $(".feedback").innerText = `PELI OHI\nOikea vastaus oli: ${word}`;
 }
 
 function collectGuess({ kb, board, round, words }) {
@@ -82,7 +82,7 @@ function collectGuess({ kb, board, round, words }) {
         if (letters.length === 5) {
           const guessIsValid = words.includes(letters.join(""));
           if (!guessIsValid) {
-            $(".feedback").innerText = "Invalid Word";
+            $(".feedback").innerText = "Virheellinen sana";
             await animate($$(".round")[round], "shake", 800);
           } else {
             $(".feedback").innerText = "";
